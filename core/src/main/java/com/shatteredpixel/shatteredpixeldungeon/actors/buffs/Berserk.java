@@ -91,10 +91,6 @@ public class Berserk extends ShieldBuff implements ActionIndicator.Action {
 		powerLossBuffer = bundle.getInt(POWER_BUFFER);
 		levelRecovery = bundle.getFloat(LEVEL_RECOVERY);
 		turnRecovery = bundle.getInt(TURN_RECOVERY);
-
-		if (power >= 1f && state == State.NORMAL){
-			ActionIndicator.setAction(this);
-		}
 	}
 
 	@Override
@@ -131,12 +127,6 @@ public class Berserk extends ShieldBuff implements ActionIndicator.Action {
 			} else {
 				power -= GameMath.gate(0.1f, power, 1f) * 0.067f * Math.pow((target.HP / (float) target.HT), 2);
 
-				if (power < 1f){
-					ActionIndicator.clearAction(this);
-				} else {
-					ActionIndicator.refresh();
-				}
-
 				if (power <= 0) {
 					detach();
 				}
@@ -155,7 +145,6 @@ public class Berserk extends ShieldBuff implements ActionIndicator.Action {
 	@Override
 	public void detach() {
 		super.detach();
-		ActionIndicator.clearAction(this);
 	}
 
 	public float enchantFactor(float chance){
@@ -172,7 +161,6 @@ public class Berserk extends ShieldBuff implements ActionIndicator.Action {
 				&& power >= 1f
 				&& ((Hero)target).hasTalent(Talent.DEATHLESS_FURY)){
 			startBerserking();
-			ActionIndicator.clearAction(this);
 		}
 
 		return state == State.BERSERK && target.shielding() > 0;
@@ -232,9 +220,6 @@ public class Berserk extends ShieldBuff implements ActionIndicator.Action {
 		power = Math.min(maxPower, power + (damage/(float)target.HT)/3f );
 		BuffIndicator.refreshHero(); //show new power immediately
 		powerLossBuffer = 3; //2 turns until rage starts dropping
-		if (power >= 1f){
-			ActionIndicator.setAction(this);
-		}
 	}
 
 	public void recover(float percent){

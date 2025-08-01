@@ -138,13 +138,6 @@ public abstract class ClericSpell {
 
 		} else if (tier == 3){
 
-			if (cleric.subClass == HeroSubClass.PRIEST) {
-				spells.add(Radiance.INSTANCE);
-
-			} else if (cleric.subClass == HeroSubClass.PALADIN){
-				spells.add(Smite.INSTANCE);
-			}
-
 			if (cleric.hasTalent(Talent.CLEANSE)){
 				spells.add(Cleanse.INSTANCE);
 			}

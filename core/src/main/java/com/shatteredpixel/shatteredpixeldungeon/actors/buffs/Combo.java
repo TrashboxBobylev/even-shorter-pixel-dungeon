@@ -99,8 +99,6 @@ public class Combo extends Buff implements ActionIndicator.Action {
 
 		if ((getHighestMove() != null)) {
 
-			ActionIndicator.setAction( this );
-
 			GLog.p( Messages.get(this, "combo", count) );
 			
 		}
@@ -111,12 +109,6 @@ public class Combo extends Buff implements ActionIndicator.Action {
 
 	public void addTime( float time ){
 		comboTime += time;
-	}
-
-	@Override
-	public void detach() {
-		super.detach();
-		ActionIndicator.clearAction(this);
 	}
 
 	@Override
@@ -162,8 +154,6 @@ public class Combo extends Buff implements ActionIndicator.Action {
 
 		clobberUsed = bundle.getBoolean(CLOBBER_USED);
 		parryUsed = bundle.getBoolean(PARRY_USED);
-
-		if (getHighestMove() != null) ActionIndicator.setAction(this);
 	}
 
 	@Override
