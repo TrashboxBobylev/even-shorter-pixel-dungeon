@@ -87,22 +87,6 @@ public class CityBossLevel extends Level {
 	private ImpShopRoom impShop;
 
 	@Override
-	public void playLevelMusic() {
-		if (locked){
-			if (BossHealthBar.isBleeding()){
-				Music.INSTANCE.play(Assets.Music.CITY_BOSS_FINALE, true);
-			} else {
-				Music.INSTANCE.play(Assets.Music.CITY_BOSS, true);
-			}
-		//if top door isn't unlocked
-		} else if (map[topDoor] == Terrain.LOCKED_DOOR){
-			Music.INSTANCE.end();
-		} else {
-			Music.INSTANCE.playTracks(CityLevel.CITY_TRACK_LIST, CityLevel.CITY_TRACK_CHANCES, false);
-		}
-	}
-
-	@Override
 	public String tilesTex() {
 		return Assets.Environment.TILES_CITY;
 	}
@@ -340,13 +324,6 @@ public class CityBossLevel extends Level {
 		set( bottomDoor, Terrain.LOCKED_DOOR );
 		GameScene.updateMap( bottomDoor );
 		Dungeon.observe();
-
-		Game.runOnRenderThread(new Callback() {
-			@Override
-			public void call() {
-				Music.INSTANCE.play(Assets.Music.CITY_BOSS, true);
-			}
-		});
 	}
 
 	@Override

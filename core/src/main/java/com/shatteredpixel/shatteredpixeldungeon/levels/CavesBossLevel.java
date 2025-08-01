@@ -78,22 +78,6 @@ public class CavesBossLevel extends Level {
 	}
 
 	@Override
-	public void playLevelMusic() {
-		if (locked){
-			if (BossHealthBar.isBleeding()){
-				Music.INSTANCE.play(Assets.Music.CAVES_BOSS_FINALE, true);
-			} else {
-				Music.INSTANCE.play(Assets.Music.CAVES_BOSS, true);
-			}
-		//if wall isn't broken
-		} else if (map[14 + 13*width()] == Terrain.CUSTOM_DECO){
-			Music.INSTANCE.end();
-		} else {
-			Music.INSTANCE.playTracks(CavesLevel.CAVES_TRACK_LIST, CavesLevel.CAVES_TRACK_CHANCES, false);
-		}
-	}
-
-	@Override
 	public String tilesTex() {
 		return Assets.Environment.TILES_CAVES;
 	}
@@ -331,13 +315,6 @@ public class CavesBossLevel extends Level {
 			boss.pos = pointToCell(Random.element(mainArena.getPoints()));
 		} while (!openSpace[boss.pos] || map[boss.pos] == Terrain.EMPTY_SP || Actor.findChar(boss.pos) != null);
 		GameScene.add( boss );
-
-		Game.runOnRenderThread(new Callback() {
-			@Override
-			public void call() {
-				Music.INSTANCE.play(Assets.Music.CAVES_BOSS, true);
-			}
-		});
 
 	}
 

@@ -83,11 +83,6 @@ public class MiningLevel extends CavesLevel {
 	}
 
 	@Override
-	public void playLevelMusic() {
-		Music.INSTANCE.play(Assets.Music.CAVES_TENSE, true);
-	}
-
-	@Override
 	protected ArrayList<Room> initRooms() {
 		ArrayList<Room> initRooms = new ArrayList<>();
 		initRooms.add ( roomEntrance = new MineEntrance());
