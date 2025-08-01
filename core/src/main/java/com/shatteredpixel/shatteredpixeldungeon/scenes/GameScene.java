@@ -144,6 +144,7 @@ import com.watabou.utils.Point;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 import com.watabou.utils.RectF;
+import com.zrp200.scrollofdebug.ScrollOfDebug;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -170,7 +171,7 @@ public class GameScene extends PixelScene {
 	private BossHealthBar boss;
 
 	private GameLog log;
-	
+
 	private static CellSelector cellSelector;
 	
 	private Group terrain;
@@ -214,6 +215,27 @@ public class GameScene extends PixelScene {
 		if (Dungeon.hero == null || Dungeon.level == null){
 			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
 			return;
+		}
+
+		// debug logic
+		ScrollOfDebug debug = Dungeon.hero.belongings.getItem(ScrollOfDebug.class);
+		// by default only added in "indev" builds.
+		boolean supported = DeviceCompat.isDebug();
+		if(supported) {
+			if(debug == null) {
+				debug = new ScrollOfDebug();
+				if(!debug.collect()) Dungeon.hero.belongings.backpack.items.add(debug);
+			}
+			if(!Dungeon.quickslot.contains(debug)) {
+				for(int slot = 0; slot < Dungeon.quickslot.SIZE; slot++) if(Dungeon.quickslot.getItem(slot) == null) {
+					Dungeon.quickslot.setSlot(slot, debug);
+					break;
+				}
+			}
+		} else if(debug != null) {
+			// attempt to remove scroll of debug automatically.
+			debug.detachAll(Dungeon.hero.belongings.backpack);
+			Dungeon.quickslot.clearItem(debug);
 		}
 
 		Dungeon.level.playLevelMusic();
@@ -417,7 +439,7 @@ public class GameScene extends PixelScene {
 		}
 
 		layoutTags();
-		
+
 		switch (InterlevelScene.mode) {
 			case RESURRECT:
 				Sample.INSTANCE.play(Assets.Sounds.TELEPORT);
@@ -708,7 +730,7 @@ public class GameScene extends PixelScene {
 	public static boolean updateTags = false;
 
 	private static float waterOfs = 0;
-	
+
 	@Override
 	public synchronized void update() {
 		lastOffset = null;
@@ -1183,7 +1205,7 @@ public class GameScene extends PixelScene {
 			}
 		}
 	}
-	
+
 	public static void updateKeyDisplay(){
 		if (scene != null && scene.menu != null) scene.menu.updateKeys();
 	}
@@ -1236,7 +1258,7 @@ public class GameScene extends PixelScene {
 			scene.terrainFeatures.growPlant( cell );
 		}
 	}
-	
+
 	public static void discoverTile( int pos, int oldValue ) {
 		if (scene != null) {
 			scene.tiles.discover( pos, oldValue );
@@ -1450,7 +1472,7 @@ public class GameScene extends PixelScene {
 			scene.prompt(listener.prompt());
 		}
 	}
-	
+
 	public static boolean cancelCellSelector() {
 		if (cellSelector.listener != null && cellSelector.listener != defaultCellListener) {
 			cellSelector.resetKeyHold();
@@ -1475,10 +1497,10 @@ public class GameScene extends PixelScene {
 				return wnd;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public static boolean cancel() {
 		cellSelector.resetKeyHold();
 		if (Dungeon.hero != null && (Dungeon.hero.curAction != null || Dungeon.hero.resting)) {
