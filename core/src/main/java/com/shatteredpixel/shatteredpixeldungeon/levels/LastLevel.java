@@ -63,12 +63,12 @@ public class LastLevel extends Level {
 
 	@Override
 	public String tilesTex() {
-		return Assets.Environment.TILES_HALLS;
+		return Assets.Environment.WATER_CAVES;
 	}
 
 	@Override
 	public String waterTex() {
-		return Assets.Environment.WATER_HALLS;
+		return Assets.Environment.WATER_CAVES;
 	}
 
 	@Override
@@ -192,17 +192,17 @@ public class LastLevel extends Level {
 	public String tileName( int tile ) {
 		switch (tile) {
 			case Terrain.WATER:
-				return Messages.get(HallsLevel.class, "water_name");
+				return Messages.get(CavesLevel.class, "water_name");
 			case Terrain.GRASS:
-				return Messages.get(HallsLevel.class, "grass_name");
+				return Messages.get(CavesLevel.class, "grass_name");
 			case Terrain.HIGH_GRASS:
-				return Messages.get(HallsLevel.class, "high_grass_name");
+				return Messages.get(CavesLevel.class, "high_grass_name");
 			case Terrain.STATUE:
 			case Terrain.STATUE_SP:
-				return Messages.get(HallsLevel.class, "statue_name");
+				return Messages.get(CavesLevel.class, "statue_name");
 			case Terrain.REGION_DECO:
 			case Terrain.REGION_DECO_ALT:
-				return Messages.get(HallsLevel.class, "region_deco_name");
+				return Messages.get(CavesLevel.class, "region_deco_name");
 			default:
 				return super.tileName( tile );
 		}
@@ -212,15 +212,15 @@ public class LastLevel extends Level {
 	public String tileDesc(int tile) {
 		switch (tile) {
 			case Terrain.WATER:
-				return Messages.get(HallsLevel.class, "water_desc");
+				return Messages.get(CavesLevel.class, "water_desc");
 			case Terrain.STATUE:
 			case Terrain.STATUE_SP:
-				return Messages.get(HallsLevel.class, "statue_desc");
+				return Messages.get(CavesLevel.class, "statue_desc");
 			case Terrain.BOOKSHELF:
-				return Messages.get(HallsLevel.class, "bookshelf_desc");
+				return Messages.get(CavesLevel.class, "bookshelf_desc");
 			case Terrain.REGION_DECO:
 			case Terrain.REGION_DECO_ALT:
-				return Messages.get(HallsLevel.class, "region_deco_desc");
+				return Messages.get(CavesLevel.class, "region_deco_desc");
 			default:
 				return super.tileDesc( tile );
 		}
@@ -229,7 +229,7 @@ public class LastLevel extends Level {
 	@Override
 	public Group addVisuals () {
 		super.addVisuals();
-		HallsLevel.addHallsVisuals(this, visuals);
+		CavesLevel.addCavesVisuals(this, visuals);
 		return visuals;
 	}
 
