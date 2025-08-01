@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.rings;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
@@ -59,7 +60,12 @@ public class RingOfTenacity extends Ring {
 	
 	public static float damageMultiplier( Char t ){
 		//(HT - HP)/HT = heroes current % missing health.
-		return (float)Math.pow(0.85, getBuffedBonus( t, Tenacity.class)*((float)(t.HT - t.HP)/t.HT));
+        float value = (float) Math.pow(0.85, getBuffedBonus(t, Tenacity.class) * ((float) (t.HT - t.HP) / t.HT));
+        Hunger hunger = t.buff(Hunger.class);
+        if (hunger != null && hunger.accumulatingDamage > 0){
+            value /= Math.max(0.5f, 1f - (float)hunger.accumulatingDamage/t.HT/2);
+        }
+        return value;
 	}
 
 	public class Tenacity extends RingBuff {

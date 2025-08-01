@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.rings;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
@@ -58,7 +59,12 @@ public class RingOfEvasion extends Ring {
 	}
 	
 	public static float evasionMultiplier( Char target ){
-		return (float) Math.pow( 1.125, getBuffedBonus(target, Evasion.class));
+        float eva = (float) Math.pow(1.125, getBuffedBonus(target, Evasion.class));
+        Hunger hunger = target.buff(Hunger.class);
+        if (hunger != null && hunger.accumulatingDamage > 0){
+            eva *= Math.max(0.5f, 1f - (float)hunger.accumulatingDamage/target.HT/1.5f);
+        }
+        return eva;
 	}
 
 	public class Evasion extends RingBuff {

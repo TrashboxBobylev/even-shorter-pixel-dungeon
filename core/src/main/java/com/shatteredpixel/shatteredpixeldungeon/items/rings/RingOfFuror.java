@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items.rings;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 
@@ -58,7 +59,12 @@ public class RingOfFuror extends Ring {
 	}
 	
 	public static float attackSpeedMultiplier(Char target ){
-		return (float)Math.pow(1.09051, getBuffedBonus(target, Furor.class));
+        float speed = (float) Math.pow(1.09051, getBuffedBonus(target, Furor.class));
+        Hunger hunger = target.buff(Hunger.class);
+        if (hunger != null && hunger.accumulatingDamage > 0){
+            speed *= Math.max(0.5f, 1f - (float)hunger.accumulatingDamage/target.HT/2);
+        }
+        return speed;
 	}
 
 	public class Furor extends RingBuff {

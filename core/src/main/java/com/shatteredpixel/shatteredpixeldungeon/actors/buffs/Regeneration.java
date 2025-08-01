@@ -83,12 +83,17 @@ public class Regeneration extends Buff {
 
 				partialRegen += 1f / delay;
 
-				if (partialRegen >= 1) {
-					target.HP += 1;
-					partialRegen--;
-					if (target.HP == regencap()) {
-						((Hero) target).resting = false;
-					}
+				while (partialRegen >= 1) {
+                    Hunger hunger = target.buff(Hunger.class);
+                    if (hunger != null && hunger.accumulatingDamage > 0){
+                        hunger.accumulatingDamage = Math.max(0, hunger.accumulatingDamage-2);
+                    } else {
+                        target.HP += 1;
+                        partialRegen--;
+                        if (target.HP == regencap()) {
+                            ((Hero) target).resting = false;
+                        }
+                    }
 				}
 
 			}

@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.buffs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -41,9 +42,11 @@ public class Hunger extends Buff implements Hero.Doom {
 
 	private float level;
 	private float partialDamage;
+    public int accumulatingDamage;
 
 	private static final String LEVEL			= "level";
 	private static final String PARTIALDAMAGE 	= "partialDamage";
+    private static final String ACCUMDAMAGE 	= "accumulatedDamage";
 
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -57,6 +60,7 @@ public class Hunger extends Buff implements Hero.Doom {
 		super.restoreFromBundle( bundle );
 		level = bundle.getFloat( LEVEL );
 		partialDamage = bundle.getFloat(PARTIALDAMAGE);
+        accumulatingDamage = bundle.getInt(ACCUMDAMAGE);
 	}
 
 	@Override
@@ -80,6 +84,8 @@ public class Hunger extends Buff implements Hero.Doom {
 
 				if (partialDamage > 1){
 					target.damage( (int)partialDamage, this);
+                    if (Dungeon.isChallenged(Challenges.NO_FOOD))
+                        accumulatingDamage += (int)partialDamage;
 					partialDamage -= (int)partialDamage;
 				}
 				
