@@ -225,9 +225,6 @@ public class Assets {
 
 		public static final String SEWERS   = "splashes/sewers.jpg";
 		public static final String PRISON   = "splashes/prison.jpg";
-		public static final String CAVES    = "splashes/caves.jpg";
-		public static final String CITY     = "splashes/city.jpg";
-		public static final String HALLS    = "splashes/halls.jpg";
 	}
 
 	public static class Sprites {

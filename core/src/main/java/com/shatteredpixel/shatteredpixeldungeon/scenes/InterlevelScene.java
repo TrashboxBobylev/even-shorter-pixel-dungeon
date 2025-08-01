@@ -175,32 +175,11 @@ public class InterlevelScene extends PixelScene {
 						case 1: loadingCenter = 485; break; //focus on center pipe and door
 					}
 					break;
-				case 2:
+				case 2: default:
 					loadingAsset = Assets.Splashes.PRISON;
 					switch (Random.Int(3)){
 						case 0: loadingCenter = 190; break; //focus on left skeleton
 						case 1: loadingCenter = 402; break; //focus on center arch
-					}
-					break;
-				case 3:
-					loadingAsset = Assets.Splashes.CAVES;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 340; break; //focus on center gnoll groups
-						case 1: loadingCenter = 625; break; //focus on right gnoll
-					}
-					break;
-				case 4:
-					loadingAsset = Assets.Splashes.CITY;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 275; break; //focus on left bookcases
-						case 1: loadingCenter = 485; break; //focus on center pathway
-					}
-					break;
-				case 5: default:
-					loadingAsset = Assets.Splashes.HALLS;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 145; break; //focus on left arches
-						case 1: loadingCenter = 400; break; //focus on ripper demon
 					}
 					break;
 			}
