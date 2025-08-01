@@ -21,8 +21,11 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.buffs;
 
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 import com.watabou.noosa.Image;
@@ -167,7 +170,11 @@ public class Buff extends Actor {
 
 	public static<T extends FlavourBuff> T append( Char target, Class<T> buffClass, float duration ) {
 		T buff = append( target, buffClass );
-		buff.spend( duration * target.resist(buffClass) );
+        float time = duration * target.resist(buffClass);
+        if (target instanceof Hero && Dungeon.isChallenged(Challenges.ALLERGY) && buff.type == buffType.NEGATIVE){
+            time *= 3;
+        }
+        buff.spend(time);
 		return buff;
 	}
 
@@ -190,7 +197,11 @@ public class Buff extends Actor {
 	//postpones an already active buff, or creates & attaches a new buff and delays that.
 	public static<T extends FlavourBuff> T prolong( Char target, Class<T> buffClass, float duration ) {
 		T buff = affect( target, buffClass );
-		buff.postpone( duration * target.resist(buffClass) );
+        float time = duration * target.resist(buffClass);
+        if (target instanceof Hero && Dungeon.isChallenged(Challenges.ALLERGY) && buff.type == buffType.NEGATIVE){
+            time *= 3;
+        }
+        buff.postpone(time);
 		return buff;
 	}
 

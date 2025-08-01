@@ -75,15 +75,17 @@ public class PotionOfHealing extends Potion {
 	}
 	
 	public static void cure( Char ch ) {
-		Buff.detach( ch, Poison.class );
-		Buff.detach( ch, Cripple.class );
-		Buff.detach( ch, Weakness.class );
-		Buff.detach( ch, Vulnerable.class );
-		Buff.detach( ch, Bleeding.class );
-		Buff.detach( ch, Blindness.class );
-		Buff.detach( ch, Drowsy.class );
-		Buff.detach( ch, Slow.class );
-		Buff.detach( ch, Vertigo.class);
+        if (!Dungeon.isChallenged(Challenges.ALLERGY)) {
+            Buff.detach(ch, Poison.class);
+            Buff.detach(ch, Cripple.class);
+            Buff.detach(ch, Weakness.class);
+            Buff.detach(ch, Vulnerable.class);
+            Buff.detach(ch, Bleeding.class);
+            Buff.detach(ch, Blindness.class);
+            Buff.detach(ch, Drowsy.class);
+            Buff.detach(ch, Slow.class);
+            Buff.detach(ch, Vertigo.class);
+        }
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class Challenges {
 	public static final int NO_FOOD				= 1;
 	public static final int NO_HP			    = 2;
 	public static final int NO_HEALING			= 4;
-	public static final int NO_HERBALISM		= 8;
+	public static final int ALLERGY		        = 8;
 	public static final int RANDOM_HP       	= 16;
 	public static final int DARKNESS			= 32;
 	public static final int NO_SCROLLS		    = 64;
@@ -45,14 +45,14 @@ public class Challenges {
 			"no_food",
             "no_hp",
 			"no_healing",
-			"no_herbalism",
+			"allergy",
 			"random_hp",
 			"darkness",
 			"no_scrolls"
 	};
 
 	public static final int[] MASKS = {
-			CHAMPION_ENEMIES, STRONGER_BOSSES, NO_FOOD, NO_HP, NO_HEALING, NO_HERBALISM, RANDOM_HP, DARKNESS, NO_SCROLLS
+			CHAMPION_ENEMIES, STRONGER_BOSSES, NO_FOOD, NO_HP, NO_HEALING, ALLERGY, RANDOM_HP, DARKNESS, NO_SCROLLS
 	};
 
 	public static int activeChallenges(){
@@ -65,7 +65,7 @@ public class Challenges {
 
 	public static boolean isItemBlocked( Item item ){
 
-		if (Dungeon.isChallenged(NO_HERBALISM) && item instanceof Dewdrop){
+		if (item instanceof Dewdrop){
 			return true;
 		}
 
