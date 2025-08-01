@@ -33,7 +33,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion;
 import com.shatteredpixel.shatteredpixeldungeon.items.remains.RemainsItem;
 import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll;
-import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Bestiary;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
@@ -72,11 +71,6 @@ public class Badges {
 		FOUND_RATMOGRIFY,
 
 		//bronze
-		UNLOCK_MAGE                 ( 1 ),
-		UNLOCK_ROGUE                ( 2 ),
-		UNLOCK_HUNTRESS             ( 3 ),
-		UNLOCK_DUELIST              ( 4 ),
-		UNLOCK_CLERIC               ( 5 ),
 		MONSTERS_SLAIN_1            ( 6 ),
 		MONSTERS_SLAIN_2            ( 7 ),
 		GOLD_COLLECTED_1            ( 8 ),
@@ -459,10 +453,6 @@ public class Badges {
 		if (!item.levelKnown || item instanceof Artifact) {
 			return;
 		}
-
-		if (item instanceof MeleeWeapon){
-			validateDuelistUnlock();
-		}
 		
 		Badge badge = null;
 		if (!local.contains( Badge.ITEM_LEVEL_1 ) && item.level() >= 3) {
@@ -814,47 +804,6 @@ public class Badges {
 
 	public static void validateRatmogrify(){
 		unlock(Badge.FOUND_RATMOGRIFY);
-	}
-	
-	public static void validateMageUnlock(){
-		if (Statistics.upgradesUsed >= 1 && !isUnlocked(Badge.UNLOCK_MAGE)){
-			displayBadge( Badge.UNLOCK_MAGE );
-		}
-	}
-	
-	public static void validateRogueUnlock(){
-		if (Statistics.sneakAttacks >= 10 && !isUnlocked(Badge.UNLOCK_ROGUE)){
-			displayBadge( Badge.UNLOCK_ROGUE );
-		}
-	}
-	
-	public static void validateHuntressUnlock(){
-		if (Statistics.thrownAttacks >= 10 && !isUnlocked(Badge.UNLOCK_HUNTRESS)){
-			displayBadge( Badge.UNLOCK_HUNTRESS );
-		}
-	}
-
-	public static void validateDuelistUnlock(){
-		if (!isUnlocked(Badge.UNLOCK_DUELIST) && Dungeon.hero != null
-				&& Dungeon.hero.belongings.weapon instanceof MeleeWeapon
-				&& ((MeleeWeapon) Dungeon.hero.belongings.weapon).tier >= 2
-				&& ((MeleeWeapon) Dungeon.hero.belongings.weapon).STRReq() <= Dungeon.hero.STR()){
-
-			if (Dungeon.hero.belongings.weapon.isIdentified() &&
-					((MeleeWeapon) Dungeon.hero.belongings.weapon).STRReq() <= Dungeon.hero.STR()) {
-				displayBadge(Badge.UNLOCK_DUELIST);
-
-			} else if (!Dungeon.hero.belongings.weapon.isIdentified() &&
-					((MeleeWeapon) Dungeon.hero.belongings.weapon).STRReq(0) <= Dungeon.hero.STR()){
-				displayBadge(Badge.UNLOCK_DUELIST);
-			}
-		}
-	}
-
-	public static void validateClericUnlock(){
-		if (!isUnlocked(Badge.UNLOCK_CLERIC)){
-			displayBadge( Badge.UNLOCK_CLERIC );
-		}
 	}
 	
 	public static void validateVictory() {
