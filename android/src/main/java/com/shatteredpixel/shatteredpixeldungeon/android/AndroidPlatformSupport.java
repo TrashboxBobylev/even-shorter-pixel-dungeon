@@ -209,22 +209,7 @@ public class AndroidPlatformSupport extends PlatformSupport {
 		//android 7.0+. all asian fonts are nicely contained in one spot
 		if (Gdx.files.absolute("/system/fonts/NotoSansCJK-Regular.ttc").exists()) {
 			//typefaces are 0-JP, 1-KR, 2-SC, 3-TC.
-			int typeFace;
-			switch (SPDSettings.language()) {
-				case JAPANESE:
-					typeFace = 0;
-					break;
-				case KOREAN:
-					typeFace = 1;
-					break;
-				case CHI_SMPL:
-				default:
-					typeFace = 2;
-					break;
-				case CHI_TRAD:
-					typeFace = 3;
-					break;
-			}
+			int typeFace = 2;
 			KRFontGenerator = ZHFontGenerator = JPFontGenerator = new FreeTypeFontGenerator(Gdx.files.absolute("/system/fonts/NotoSansCJK-Regular.ttc"), typeFace);
 			
 		//otherwise we have to go over a few possibilities.
