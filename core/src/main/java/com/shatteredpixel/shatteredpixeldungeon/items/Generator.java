@@ -23,17 +23,9 @@ package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClericArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.DuelistArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.HuntressArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.MageArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.RogueArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.WarriorArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.ChaliceOfBlood;
@@ -475,17 +467,9 @@ public class Generator {
 			ARMOR.classes = new Class<?>[]{
 					ClothArmor.class,
 					LeatherArmor.class,
-					MailArmor.class,
-					ScaleArmor.class,
-					PlateArmor.class,
-					WarriorArmor.class,
-					MageArmor.class,
-					RogueArmor.class,
-					HuntressArmor.class,
-					DuelistArmor.class,
-					ClericArmor.class
+					MailArmor.class
 			};
-			ARMOR.probs = new float[]{ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 };
+			ARMOR.probs = new float[]{ 1, 1, 1 };
 			
 			//see Generator.randomMissile
 			MISSILE.classes = new Class<?>[]{};
@@ -607,11 +591,8 @@ public class Generator {
 	}
 
 	private static final float[][] floorSetTierProbs = new float[][] {
-			{0, 75, 20,  4,  1},
-			{0, 25, 50, 20,  5},
-			{0,  0, 40, 50, 10},
-			{0,  0, 20, 40, 40},
-			{0,  0,  0, 20, 80}
+			{0, 75, 25},
+			{0, 35, 65}
 	};
 
 	private static boolean usingFirstDeck = false;
@@ -784,9 +765,7 @@ public class Generator {
 	public static final Category[] wepTiers = new Category[]{
 			Category.WEP_T1,
 			Category.WEP_T2,
-			Category.WEP_T3,
-			Category.WEP_T4,
-			Category.WEP_T5
+			Category.WEP_T3
 	};
 
 	public static MeleeWeapon randomWeapon(){
@@ -817,9 +796,7 @@ public class Generator {
 	public static final Category[] misTiers = new Category[]{
 			Category.MIS_T1,
 			Category.MIS_T2,
-			Category.MIS_T3,
-			Category.MIS_T4,
-			Category.MIS_T5
+			Category.MIS_T3
 	};
 	
 	public static MissileWeapon randomMissile(){

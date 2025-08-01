@@ -360,7 +360,6 @@ public class Bomb extends Item {
 			validIngredients.put(ScrollOfRemoveCurse.class,     HolyBomb.class);
 			
 			validIngredients.put(GooBlob.class,                 ArcaneBomb.class);
-			validIngredients.put(MetalShard.class,              ShrapnelBomb.class);
 		}
 		
 		private static final HashMap<Class<?extends Bomb>, Integer> bombCosts = new HashMap<>();
@@ -378,7 +377,6 @@ public class Bomb extends Item {
 			bombCosts.put(HolyBomb.class,       3);
 			
 			bombCosts.put(ArcaneBomb.class,     6);
-			bombCosts.put(ShrapnelBomb.class,   6);
 		}
 		
 		@Override
