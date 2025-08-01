@@ -129,6 +129,7 @@ public abstract class Mob extends Char {
 	protected int enemyID = -1; //used for save/restore
 	protected boolean enemySeen;
 	protected boolean alerted = false;
+    public float scaleFactor = 1f;
 
 	protected static final float TIME_TO_WAKE_UP = 1f;
 
@@ -149,6 +150,7 @@ public abstract class Mob extends Char {
 	private static final String MAX_LVL	= "max_lvl";
 
 	private static final String ENEMY_ID	= "enemy_id";
+    private static final String SCALE   = "scale";
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
@@ -169,6 +171,7 @@ public abstract class Mob extends Char {
 		bundle.put( SEEN, enemySeen );
 		bundle.put( TARGET, target );
 		bundle.put( MAX_LVL, maxLvl );
+        bundle.put( SCALE, scaleFactor);
 
 		if (enemy != null) {
 			bundle.put(ENEMY_ID, enemy.id() );
@@ -220,6 +223,20 @@ public abstract class Mob extends Char {
 	protected boolean act() {
 		
 		super.act();
+
+        if (Dungeon.isChallenged(Challenges.RANDOM_HP) && scaleFactor == 1f &&
+                !properties().contains(Property.BOSS) && !properties().contains(Property.MINIBOSS) &&
+                !(this instanceof Swarm)){
+            scaleFactor = Random.Float(0.5f, 1.75f);
+            HP = HT = (int) (HT * scaleFactor);
+            if (scaleFactor >= 1.45f){
+                HP = HT = (int) (HT * 1.45f);
+            }
+            if (HT <= 1){
+                HP = HT = 1;
+            }
+            sprite.linkVisuals(this);
+        }
 		
 		boolean justAlerted = alerted;
 		alerted = false;
@@ -649,6 +666,7 @@ public abstract class Mob extends Char {
 	public float attackDelay() {
 		float delay = 1f;
 		if ( buff(Adrenaline.class) != null) delay /= 1.5f;
+        delay *= Dungeon.isChallenged(Challenges.RANDOM_HP) && scaleFactor != 1 ? 0.8f * scaleFactor : 1;
 		return delay;
 	}
 	
@@ -692,7 +710,7 @@ public abstract class Mob extends Char {
 		if ( !surprisedBy(enemy)
 				&& paralysed == 0
 				&& !(alignment == Alignment.ALLY && enemy == Dungeon.hero)) {
-			return this.defenseSkill;
+			return (int) (this.defenseSkill/((Dungeon.isChallenged(Challenges.RANDOM_HP) && scaleFactor != 1) ? (0.8f * scaleFactor) : 1));
 		} else {
 			return 0;
 		}
@@ -759,7 +777,7 @@ public abstract class Mob extends Char {
 
 	@Override
 	public float speed() {
-		return super.speed() * AscensionChallenge.enemySpeedModifier(this);
+		return super.speed() * AscensionChallenge.enemySpeedModifier(this)/((Dungeon.isChallenged(Challenges.RANDOM_HP) && scaleFactor != 1) ? (0.8f * scaleFactor) : 1);
 	}
 
 	public final boolean surprisedBy( Char enemy ){
@@ -793,6 +811,12 @@ public abstract class Mob extends Char {
 	public boolean isTargeting( Char ch){
 		return enemy == ch;
 	}
+
+    //70% damage to 245% damage
+    @Override
+    public int attackProc(Char enemy, int damage) {
+        return super.attackProc(enemy, (int) (damage*((Dungeon.isChallenged(Challenges.RANDOM_HP) && scaleFactor != 1) ? (1.4f * scaleFactor) : 1)));
+    }
 
 	@Override
 	public void damage( int dmg, Object src ) {
@@ -1135,7 +1159,7 @@ public abstract class Mob extends Char {
 				target = Dungeon.level.randomDestination( Mob.this );
 			}
 
-			if (alignment == Alignment.ENEMY && Dungeon.isChallenged(Challenges.SWARM_INTELLIGENCE)) {
+			if (alignment == Alignment.ENEMY) {
 				for (Mob mob : Dungeon.level.mobs) {
 					if (mob.paralysed <= 0
 							&& Dungeon.level.distance(pos, mob.pos) <= 8
@@ -1173,7 +1197,7 @@ public abstract class Mob extends Char {
 			state = HUNTING;
 			target = enemy.pos;
 			
-			if (alignment == Alignment.ENEMY && Dungeon.isChallenged( Challenges.SWARM_INTELLIGENCE )) {
+			if (alignment == Alignment.ENEMY) {
 				for (Mob mob : Dungeon.level.mobs) {
 					if (mob.paralysed <= 0
 							&& Dungeon.level.distance(pos, mob.pos) <= 8
