@@ -130,6 +130,9 @@ public abstract class RegularLevel extends Level {
 		if (feeling == Feeling.LARGE){
 			standards = (int)Math.ceil(standards * 1.5f);
 		}
+        if (Dungeon.isChallenged(Challenges.MANY_MOBS)){
+            standards *= 4;
+        }
 		for (int i = 0; i < standards; i++) {
 			StandardRoom s;
 			do {
@@ -228,6 +231,9 @@ public abstract class RegularLevel extends Level {
 				}
 			}
 		}
+        if (Dungeon.isChallenged(Challenges.MANY_MOBS)){
+            mobsToSpawn *= 16;
+        }
 		Random.shuffle(stdRooms);
 		Iterator<Room> stdRoomIter = stdRooms.iterator();
 
