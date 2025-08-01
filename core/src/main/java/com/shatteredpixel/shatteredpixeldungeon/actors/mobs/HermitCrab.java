@@ -30,8 +30,8 @@ public class HermitCrab extends Crab {
 	{
 		spriteClass = HermitCrabSprite.class;
 
-		HP = HT = 25; //+67% HP
-		baseSpeed = 1f; //-50% speed
+		HP = HT = 28; //+67% HP
+		baseSpeed = 0.75f; //-50% speed
 
 		//3x more likely to drop meat, and drops a guaranteed armor
 		lootChance = 0.5f;
