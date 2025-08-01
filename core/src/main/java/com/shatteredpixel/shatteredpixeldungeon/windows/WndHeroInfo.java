@@ -21,11 +21,11 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.windows;
 
-import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.ArmorAbility;
+import com.shatteredpixel.shatteredpixeldungeon.items.TengusMask;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Catalog;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -48,7 +48,6 @@ public class WndHeroInfo extends WndTabbed {
 	private HeroInfoTab heroInfo;
 	private TalentInfoTab talentInfo;
 	private SubclassInfoTab subclassInfo;
-	private ArmorAbilityInfoTab abilityInfo;
 
 	private static int WIDTH = 120;
 	private static int MIN_HEIGHT = 125;
@@ -106,7 +105,7 @@ public class WndHeroInfo extends WndTabbed {
 			}
 		});
 
-		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_2) || DeviceCompat.isDebug()) {
+		if (Catalog.isSeen(TengusMask.class) || DeviceCompat.isDebug()) {
 			subclassInfo = new SubclassInfoTab(cl);
 			add(subclassInfo);
 			subclassInfo.setSize(WIDTH, MIN_HEIGHT);
@@ -117,21 +116,6 @@ public class WndHeroInfo extends WndTabbed {
 				protected void select(boolean value) {
 					super.select(value);
 					subclassInfo.visible = subclassInfo.active = value;
-				}
-			});
-		}
-
-		if (Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4) || DeviceCompat.isDebug()) {
-			abilityInfo = new ArmorAbilityInfoTab(cl);
-			add(abilityInfo);
-			abilityInfo.setSize(WIDTH, MIN_HEIGHT);
-			finalHeight = (int)Math.max(finalHeight, abilityInfo.height());
-
-			add(new IconTab(new ItemSprite(ItemSpriteSheet.CROWN, null)) {
-				@Override
-				protected void select(boolean value) {
-					super.select(value);
-					abilityInfo.visible = abilityInfo.active = value;
 				}
 			});
 		}
@@ -255,7 +239,6 @@ public class WndHeroInfo extends WndTabbed {
 
 			ArrayList<LinkedHashMap<Talent, Integer>> talents = new ArrayList<>();
 			Talent.initClassTalents(cls, talents);
-			talents.get(2).clear(); //we show T3 talents with subclasses
 
 			talentPane = new TalentsPane(TalentButton.Mode.INFO, talents);
 			add(talentPane);
@@ -328,66 +311,6 @@ public class WndHeroInfo extends WndTabbed {
 				subClsInfos[i].setRect(width-20, subClsDescs[i].top() + (subClsDescs[i].height()-20)/2, 20, 20);
 
 				pos = subClsDescs[i].bottom() + 4*MARGIN;
-			}
-
-			height = Math.max(height, pos - 4*MARGIN);
-
-		}
-	}
-
-	private static class ArmorAbilityInfoTab extends Component {
-
-		private RenderedTextBlock title;
-		private RenderedTextBlock message;
-		private RenderedTextBlock[] abilityDescs;
-		private IconButton[] abilityInfos;
-
-		public ArmorAbilityInfoTab(HeroClass cls){
-			super();
-			title = PixelScene.renderTextBlock(Messages.titleCase(Messages.get(WndHeroInfo.class, "abilities")), 9);
-			title.hardlight(TITLE_COLOR);
-			add(title);
-
-			message = PixelScene.renderTextBlock(Messages.get(WndHeroInfo.class, "abilities_msg"), 6);
-			add(message);
-
-			ArmorAbility[] abilities = cls.armorAbilities();
-
-			abilityDescs = new RenderedTextBlock[abilities.length];
-			abilityInfos = new IconButton[abilities.length];
-
-			for (int i = 0; i < abilities.length; i++){
-				abilityDescs[i] = PixelScene.renderTextBlock(abilities[i].shortDesc(), 6);
-				int finalI = i;
-				abilityInfos[i] = new IconButton( Icons.get(Icons.INFO) ){
-					@Override
-					protected void onClick() {
-						Game.scene().addToFront(new WndInfoArmorAbility(cls, abilities[finalI]));
-					}
-				};
-				add(abilityDescs[i]);
-				add(abilityInfos[i]);
-			}
-
-		}
-
-		@Override
-		protected void layout() {
-			super.layout();
-
-			title.setPos((width-title.width())/2, MARGIN);
-			message.maxWidth((int)width);
-			message.setPos(0, title.bottom()+4*MARGIN);
-
-			float pos = message.bottom()+4*MARGIN;
-
-			for (int i = 0; i < abilityDescs.length; i++){
-				abilityDescs[i].maxWidth((int)width - 20);
-				abilityDescs[i].setPos(0, pos);
-
-				abilityInfos[i].setRect(width-20, abilityDescs[i].top() + (abilityDescs[i].height()-20)/2, 20, 20);
-
-				pos = abilityDescs[i].bottom() + 4*MARGIN;
 			}
 
 			height = Math.max(height, pos - 4*MARGIN);

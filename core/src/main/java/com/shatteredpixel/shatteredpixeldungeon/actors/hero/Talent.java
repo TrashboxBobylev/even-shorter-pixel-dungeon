@@ -42,7 +42,6 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.RevealedArea;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.ScrollEmpower;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.WandEmpower;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.ArmorAbility;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.Ratmogrify;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.spells.DivineSense;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.spells.RecallInscription;
@@ -936,7 +935,7 @@ public enum Talent {
 		}
 	};
 
-	public static final int MAX_TALENT_TIERS = 4;
+	public static final int MAX_TALENT_TIERS = 2;
 
 	public static void initClassTalents( Hero hero ){
 		initClassTalents( hero.heroClass, hero.talents, hero.metamorphedTalents );
@@ -1011,112 +1010,8 @@ public enum Talent {
 		}
 		tierTalents.clear();
 
-		//tier 3
-		switch (cls){
-			case WARRIOR: default:
-				Collections.addAll(tierTalents, HOLD_FAST, STRONGMAN);
-				break;
-			case MAGE:
-				Collections.addAll(tierTalents, DESPERATE_POWER, ALLY_WARP);
-				break;
-			case ROGUE:
-				Collections.addAll(tierTalents, ENHANCED_RINGS, LIGHT_CLOAK);
-				break;
-			case HUNTRESS:
-				Collections.addAll(tierTalents, POINT_BLANK, SEER_SHOT);
-				break;
-			case DUELIST:
-				Collections.addAll(tierTalents, PRECISE_ASSAULT, DEADLY_FOLLOWUP);
-				break;
-			case CLERIC:
-				Collections.addAll(tierTalents, CLEANSE, LIGHT_READING);
-				break;
-		}
-		for (Talent talent : tierTalents){
-			if (replacements.containsKey(talent)){
-				talent = replacements.get(talent);
-			}
-			talents.get(2).put(talent, 0);
-		}
-		tierTalents.clear();
-
 		//tier4
 		//TBD
-	}
-
-	public static void initSubclassTalents( Hero hero ){
-		initSubclassTalents( hero.subClass, hero.talents );
-	}
-
-	public static void initSubclassTalents( HeroSubClass cls, ArrayList<LinkedHashMap<Talent, Integer>> talents ){
-		if (cls == HeroSubClass.NONE) return;
-
-		while (talents.size() < MAX_TALENT_TIERS){
-			talents.add(new LinkedHashMap<>());
-		}
-
-		ArrayList<Talent> tierTalents = new ArrayList<>();
-
-		//tier 3
-		switch (cls){
-			case BERSERKER: default:
-				Collections.addAll(tierTalents, ENDLESS_RAGE, DEATHLESS_FURY, ENRAGED_CATALYST);
-				break;
-			case GLADIATOR:
-				Collections.addAll(tierTalents, CLEAVE, LETHAL_DEFENSE, ENHANCED_COMBO);
-				break;
-			case BATTLEMAGE:
-				Collections.addAll(tierTalents, EMPOWERED_STRIKE, MYSTICAL_CHARGE, EXCESS_CHARGE);
-				break;
-			case WARLOCK:
-				Collections.addAll(tierTalents, SOUL_EATER, SOUL_SIPHON, NECROMANCERS_MINIONS);
-				break;
-			case ASSASSIN:
-				Collections.addAll(tierTalents, ENHANCED_LETHALITY, ASSASSINS_REACH, BOUNTY_HUNTER);
-				break;
-			case FREERUNNER:
-				Collections.addAll(tierTalents, EVASIVE_ARMOR, PROJECTILE_MOMENTUM, SPEEDY_STEALTH);
-				break;
-			case SNIPER:
-				Collections.addAll(tierTalents, FARSIGHT, SHARED_ENCHANTMENT, SHARED_UPGRADES);
-				break;
-			case WARDEN:
-				Collections.addAll(tierTalents, DURABLE_TIPS, BARKSKIN, SHIELDING_DEW);
-				break;
-			case CHAMPION:
-				Collections.addAll(tierTalents, VARIED_CHARGE, TWIN_UPGRADES, COMBINED_LETHALITY);
-				break;
-			case MONK:
-				Collections.addAll(tierTalents, UNENCUMBERED_SPIRIT, MONASTIC_VIGOR, COMBINED_ENERGY);
-				break;
-			case PRIEST:
-				Collections.addAll(tierTalents, HOLY_LANCE, HALLOWED_GROUND, MNEMONIC_PRAYER);
-				break;
-			case PALADIN:
-				Collections.addAll(tierTalents, LAY_ON_HANDS, AURA_OF_PROTECTION, WALL_OF_LIGHT);
-				break;
-		}
-		for (Talent talent : tierTalents){
-			talents.get(2).put(talent, 0);
-		}
-		tierTalents.clear();
-
-	}
-
-	public static void initArmorTalents( Hero hero ){
-		initArmorTalents( hero.armorAbility, hero.talents);
-	}
-
-	public static void initArmorTalents(ArmorAbility abil, ArrayList<LinkedHashMap<Talent, Integer>> talents ){
-		if (abil == null) return;
-
-		while (talents.size() < MAX_TALENT_TIERS){
-			talents.add(new LinkedHashMap<>());
-		}
-
-		for (Talent t : abil.talents()){
-			talents.get(3).put(t, 0);
-		}
 	}
 
 	private static final String TALENT_TIER = "talents_tier_";
@@ -1175,8 +1070,6 @@ public enum Talent {
 		}
 
 		if (hero.heroClass != null)     initClassTalents(hero);
-		if (hero.subClass != null)      initSubclassTalents(hero);
-		if (hero.armorAbility != null)  initArmorTalents(hero);
 
 		for (int i = 0; i < MAX_TALENT_TIERS; i++){
 			LinkedHashMap<Talent, Integer> tier = hero.talents.get(i);

@@ -23,7 +23,6 @@ package com.shatteredpixel.shatteredpixeldungeon.ui;
 
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.Ratmogrify;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
@@ -59,10 +58,6 @@ public class TalentsPane extends ScrollPane {
 		if (mode == TalentButton.Mode.INFO){
 			if (!Badges.isUnlocked(Badges.Badge.LEVEL_REACHED_1)){
 				tiersAvailable = 1;
-			} else if (!Badges.isUnlocked(Badges.Badge.LEVEL_REACHED_2) || !Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_2)){
-				tiersAvailable = 2;
-			} else if (!Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_4)){
-				tiersAvailable = 3;
 			} else {
 				tiersAvailable = Talent.MAX_TALENT_TIERS;
 			}
@@ -70,11 +65,6 @@ public class TalentsPane extends ScrollPane {
 			while (tiersAvailable < Talent.MAX_TALENT_TIERS
 					&& Dungeon.hero.lvl+1 >= Talent.tierLevelThresholds[tiersAvailable+1]){
 				tiersAvailable++;
-			}
-			if (tiersAvailable > 2 && Dungeon.hero.subClass == HeroSubClass.NONE){
-				tiersAvailable = 2;
-			} else if (tiersAvailable > 3 && Dungeon.hero.armorAbility == null){
-				tiersAvailable = 3;
 			}
 		}
 
@@ -100,12 +90,6 @@ public class TalentsPane extends ScrollPane {
 
 		if (tiersAvailable == 1) {
 			blockText = PixelScene.renderTextBlock(Messages.get(this, "unlock_tier2"), 6);
-			content.add(blockText);
-		} else if (tiersAvailable == 2) {
-			blockText = PixelScene.renderTextBlock(Messages.get(this, "unlock_tier3"), 6);
-			content.add(blockText);
-		} else if (tiersAvailable == 3) {
-			blockText = PixelScene.renderTextBlock(Messages.get(this, "unlock_tier4"), 6);
 			content.add(blockText);
 		} else {
 			blockText = null;
