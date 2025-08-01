@@ -257,13 +257,6 @@ public class WelcomeScene extends PixelScene {
 				}
 			}
 
-			if (previousVersion <= ShatteredPixelDungeon.v2_4_2){
-				//Dwarf King's final journal entry changed, set it as un-read
-				if (Document.HALLS_KING.isPageRead(Document.KING_ATTRITION)){
-					Document.HALLS_KING.unreadPage(Document.KING_ATTRITION);
-				}
-			}
-
 			try {
 				Rankings.INSTANCE.load();
 				for (Rankings.Record rec : Rankings.INSTANCE.records.toArray(new Rankings.Record[0])){

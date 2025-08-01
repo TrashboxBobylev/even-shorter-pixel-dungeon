@@ -41,10 +41,7 @@ public enum Document {
 
 	INTROS(Icons.STAIRS, true),
 	SEWERS_GUARD(ItemSpriteSheet.SEWER_PAGE, true),
-	PRISON_WARDEN(ItemSpriteSheet.PRISON_PAGE, true),
-	CAVES_EXPLORER(ItemSpriteSheet.CAVES_PAGE, true),
-	CITY_WARLOCK(ItemSpriteSheet.CITY_PAGE, true),
-	HALLS_KING(ItemSpriteSheet.HALLS_PAGE, true);
+	PRISON_WARDEN(ItemSpriteSheet.PRISON_PAGE, true);
 	
 	Document( int sprite, boolean lore ){
 		pageIcon = null;
@@ -290,9 +287,6 @@ public enum Document {
 		INTROS.pagesStates.put("Dungeon",                       READ);
 		INTROS.pagesStates.put("Sewers",                        debug ? READ : NOT_FOUND);
 		INTROS.pagesStates.put("Prison",                        debug ? READ : NOT_FOUND);
-		INTROS.pagesStates.put("Caves",                         debug ? READ : NOT_FOUND);
-		INTROS.pagesStates.put("City",                          debug ? READ : NOT_FOUND);
-		INTROS.pagesStates.put("Halls",                         debug ? READ : NOT_FOUND);
 
 		SEWERS_GUARD.pagesStates.put("new_position",            debug ? READ : NOT_FOUND);
 		SEWERS_GUARD.pagesStates.put("dangerous",               debug ? READ : NOT_FOUND);
@@ -307,27 +301,6 @@ public enum Document {
 		PRISON_WARDEN.pagesStates.put("rotberry",               debug ? READ : NOT_FOUND);
 		PRISON_WARDEN.pagesStates.put("no_support",             debug ? READ : NOT_FOUND);
 		PRISON_WARDEN.pagesStates.put("letter",                 debug ? READ : NOT_FOUND);
-
-		CAVES_EXPLORER.pagesStates.put("expedition",            debug ? READ : NOT_FOUND);
-		CAVES_EXPLORER.pagesStates.put("gold",                  debug ? READ : NOT_FOUND);
-		CAVES_EXPLORER.pagesStates.put("troll",                 debug ? READ : NOT_FOUND);
-		CAVES_EXPLORER.pagesStates.put("city",                  debug ? READ : NOT_FOUND);
-		CAVES_EXPLORER.pagesStates.put("alive",                 debug ? READ : NOT_FOUND);
-		CAVES_EXPLORER.pagesStates.put("report",                debug ? READ : NOT_FOUND);
-
-		CITY_WARLOCK.pagesStates.put("old_king",                debug ? READ : NOT_FOUND);
-		CITY_WARLOCK.pagesStates.put("resistance",              debug ? READ : NOT_FOUND);
-		CITY_WARLOCK.pagesStates.put("failure",                 debug ? READ : NOT_FOUND);
-		CITY_WARLOCK.pagesStates.put("more_powerful",           debug ? READ : NOT_FOUND);
-		CITY_WARLOCK.pagesStates.put("new_power",               debug ? READ : NOT_FOUND);
-		CITY_WARLOCK.pagesStates.put("seen_it",                 debug ? READ : NOT_FOUND);
-
-		HALLS_KING.pagesStates.put("Rejection",                 debug ? READ : NOT_FOUND);
-		HALLS_KING.pagesStates.put("amulet",                    debug ? READ : NOT_FOUND);
-		HALLS_KING.pagesStates.put("ritual",                    debug ? READ : NOT_FOUND);
-		HALLS_KING.pagesStates.put("new_king",                  debug ? READ : NOT_FOUND);
-		HALLS_KING.pagesStates.put("thing",                     debug ? READ : NOT_FOUND);
-		HALLS_KING.pagesStates.put(KING_ATTRITION,              debug ? NOT_FOUND : NOT_FOUND);
 
 	}
 	
