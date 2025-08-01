@@ -22,7 +22,6 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.armor;
 
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
-import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -375,16 +374,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public int DRMax(int lvl){
-		if (Dungeon.isChallenged(Challenges.NO_ARMOR)){
-			return 1 + tier + lvl + augment.defenseFactor(lvl);
-		}
-
-		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
-		if (lvl > max){
-			return ((lvl - max)+1)/2;
-		} else {
-			return max;
-		}
+        return 1 + tier + lvl + augment.defenseFactor(lvl);
 	}
 
 	public final int DRMin(){
@@ -392,16 +382,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public int DRMin(int lvl){
-		if (Dungeon.isChallenged(Challenges.NO_ARMOR)){
-			return 0;
-		}
-
-		int max = DRMax(lvl);
-		if (lvl >= max){
-			return (lvl - max);
-		} else {
-			return lvl;
-		}
+        return 0;
 	}
 	
 	public float evasionFactor( Char owner, float evasion ){
