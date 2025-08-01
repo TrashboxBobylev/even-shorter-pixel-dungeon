@@ -170,14 +170,11 @@ public class Badges {
 		BOSS_SLAIN_3_ALL_SUBCLASSES ( 104, BadgeType.GLOBAL ),
 		RESEARCHER_4                ( 107, BadgeType.JOURNAL ),
 		GAMES_PLAYED_4              ( 108, BadgeType.GLOBAL ),
-		HIGH_SCORE_4                ( 109 ),
 		CHAMPION_1                  ( 110 ),
 
 		//diamond
 		PACIFIST_ASCENT             ( 120 ),
 		RESEARCHER_5                ( 123, BadgeType.JOURNAL ),
-		GAMES_PLAYED_5              ( 124, BadgeType.GLOBAL ),
-		HIGH_SCORE_5                ( 125 ),
 		CHAMPION_2                  ( 126 ),
 		CHAMPION_3                  ( 127 );
 
