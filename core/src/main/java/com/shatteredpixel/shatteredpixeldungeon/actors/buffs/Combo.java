@@ -22,7 +22,6 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.buffs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -101,7 +100,6 @@ public class Combo extends Buff implements ActionIndicator.Action {
 		if ((getHighestMove() != null)) {
 
 			ActionIndicator.setAction( this );
-			Badges.validateMasteryCombo( count );
 
 			GLog.p( Messages.get(this, "combo", count) );
 			

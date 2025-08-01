@@ -179,7 +179,7 @@ public class v3_X_Changes {
 				"\n" +
 				"Choosing and upgrading the trinket will cause all characters to gain evasion, including enemies! That might sound like a mixed bag, but keep in mind that there are lots of ways to counter enemy evasion."));
 
-		changes.addButton( new ChangeButton(BadgeBanner.image( Badges.Badge.TAKING_THE_MICK.image ), "New Badges",
+		changes.addButton( new ChangeButton(BadgeBanner.image( Badges.Badge.PACIFIST_ASCENT.image ), "New Badges",
 				"v3.1 also includes **four new badges**, each themed around a specific challenge:\n" +
 				"\n" +
 				"**- Safety Hazard** is a gold-tier badge that requires using terrain against enemies\n" +
