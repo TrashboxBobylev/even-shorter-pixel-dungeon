@@ -62,6 +62,19 @@ public class AboutScene extends PixelScene {
 		Component content = list.content();
 		content.clear();
 
+        CreditsBlock shorter = new CreditsBlock(true, 0xb3d6dd,
+                "Even Shorter Pixel Dungeon",
+                Icons.DEPTH.get(),
+                "Developed by: _Trashbox Bobylev_ in span of few days\nBased on Shattered Pixel Dungeon's open source and wishes of more advanced players, than me\nUses RKPD2's few code pieces",
+                "reddit.com/u/TrashboxBobylev",
+                "https://reddit.com/u/TrashboxBobylev");
+        if (landscape()){
+            shorter.setRect((w - fullWidth)/2f - 6, 10, 120, 0);
+        } else {
+            shorter.setRect((w - fullWidth)/2f, 6, 120, 0);
+        }
+        content.add(shorter);
+
 		//*** Shattered Pixel Dungeon Credits ***
 
 		CreditsBlock shpx = new CreditsBlock(true, Window.SHPX_COLOR,
@@ -71,11 +84,12 @@ public class AboutScene extends PixelScene {
 				"ShatteredPixel.com",
 				"https://ShatteredPixel.com");
 		if (landscape()){
-			shpx.setRect((w - fullWidth)/2f - 6, 10, 120, 0);
+			shpx.setRect((w - fullWidth)/2f - 6, shorter.bottom()+16, 120, 0);
 		} else {
-			shpx.setRect((w - fullWidth)/2f, 6, 120, 0);
+			shpx.setRect((w - fullWidth)/2f, shorter.bottom()+16, 120, 0);
 		}
 		content.add(shpx);
+        addLine(shpx.top() - 4, content);
 
 		CreditsBlock alex = new CreditsBlock(false, Window.SHPX_COLOR,
 				"Splash Art & Design:",
