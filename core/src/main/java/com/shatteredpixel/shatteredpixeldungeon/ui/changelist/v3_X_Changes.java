@@ -50,7 +50,75 @@ public class v3_X_Changes {
 
 	public static void add_Coming_Soon( ArrayList<ChangeInfo> changeInfos ) {
 
-		ChangeInfo changes = new ChangeInfo("Coming Soon", true, "");
+		ChangeInfo changes = new ChangeInfo("Even Shorter PD", true, "");
+        changes.hardlight(0xb3d6dd);
+        changeInfos.add(changes);
+        changes.addButton( new ChangeButton(Icons.get(Icons.STAIRS), "In general",
+                "_-_ The dungeon now ends after Tengu, yielding an amulet on floor 11. Have always deleted the runs because you beat the hardest region in the game? Now your wishes come true!\n\n" +
+                        "_-_ Removed all content beyond prisons, including t3-t5 weapons and talents, badges and mobs from the catalog. Less stuff to care about!\n\n" +
+                        "_-_ Reworked subclasses into masteries, providing simpler and weaker effects, and made them available via Tome of Mastery, which can be found in Rat King's room.\n\n" +
+                        "_-_ Changed some challenges to be always active, like badder bosses and swarm intelligence, and replaced them with new ones.\n\n" +
+                        "_-_ Massively reduced filesize by removing unnecessary music and text. It's only 12 megabytes now!"
+                        ));
+        changes.addButton( new ChangeButton(Icons.get(Icons.TALENT), "Class balance/reworks",
+                "_Warrior:_\n" +
+                        "_-_ Reduced broken seal's shielding cooldown from _150_ to _100_ turns\n" +
+                        "_-_ Increased shielding given by _Iron Will_ by 1\n" +
+                        "_-_ Replaced _Runic Transference_ with _Hold Fast_\n\n" +
+                        "_Gladiator:_\n" +
+                        "_-_ Reworked to only give bonus damage equal to combo, when gathering the combo from hits\n" +
+                        "_-_ Increased the time before combo is lost from _5_ to _10_ turns\n\n" +
+                        "_Berserker:_\n" +
+                        "_-_ Removed the ability to berserk and gain shielding from rage\n" +
+                        "_-_ Increased amount of rage gathered from hits by 50%",
+                "_Mage:_\n" +
+                        "_-_ Nothing, apparently! He is already good enough!\n\n" +
+                        "_Battlemage:_\n" +
+                        "_-_ Removed the charge gain from hitting with the staff, it's just wand hit effects now.\n\n" +
+                        "_Warlock:_\n" +
+                        "_-_ Reduced healing from _40%_ of damage to _30%_ of damage\n" +
+                        "_-_ Will no longer heal, when starving",
+                "_Rogue:_\n" +
+                        "_-_ Replaced _Rogue's Foresight_ with _Trapper Mastery_: a talent that shuts down traps, but has a long cooldown\n\n" +
+                        "_Freerunner:_\n" +
+                        "_-_ Now grants movement speed boost depending on charges, freerun button is removed",
+                "_Huntress:_\n" +
+                        "_-_ Reworked _Nature's Aid_ to work on player stepping on the plant instead of enemies, with additional duration if stepping on harmful plants\n" +
+                        "_-_ Buffed _Liquid nature_ rooting duration from _1/2_ to _3/4_ turns and amount of grass from _4/6_ to _6/9_ tiles\n\n" +
+                        "_Warden:_\n" +
+                        "_-_ Removed the ability to see through grass\n" +
+                        "_-_ Removed the grass spawn from throwing seeds",
+                "_Duelist:_\n" +
+                        "_-_ Increased _Patient Strike_'s damage by 1 and added 75% accuracy boost to its effect\n" +
+                        "_-_ Buffed _Liquid Agility_ by extending its effect to 2 turns of evasion and 2 attacks of accuracy\n" +
+                        "_-_ Replaced _Weapon Recharging_ with _Deadly Followup_\n" +
+                        "_-_ Replaced _Swift Equip_ with _Desperate Charge_: a talent that significantly increases weapon recharge speed with more missing charges\n\n" +
+                "_Champion:_\n" +
+                        "_-_ Removed the increased weapon recharge speed\n" +
+                        "_-_ Reduced bonus weapon charges from _2_ to _1_",
+                "_Cleric:_\n" +
+                        "_-_ Decreased base tome charge speed from _45 turns_ to _60 turns_\n" +
+                        "_-_ Decreased _Holy Intuition_'s cost by 1 charge\n\n" +
+                "_Priest:_\n" +
+                        "_-_ Removed Radiance spell\n\n" +
+                "_Paladin:_\n" +
+                        "_-_ Removed Smite spell"
+                        ));
+        changes.addButton( new ChangeButton(Icons.get(Icons.CHALLENGE_COLOR), "Difficulty measures",
+        "_-_ Reduced crab's movement speed by 25%, but gave them 3 more HP\n" +
+                "_-_ Potions of Healing now heal 40% of their normal amount\n" +
+                "_-_ Dewdrops no longer appear\n" +
+                "_-_ Armor values are reduced to their FiMA amounts\n" +
+                "_-_ Goo and Tengu always have their Badder Bosses AI\n" +
+                "_-_ Reduced amount of satiety from food by 2x\n" +
+                "_-_ Mobs always alert other mobs within 8 tiles distance, when awakened",
+                "_-_ Replaced _Faith is my Armor_ with _Degrading Health_: taking damage reduces your max health for short period of time\n\n" +
+                        "_-_ Replaced _Barren Land_ with _Overreaction_: debuffs last 3x longer and are no longer cured by some things\n" +
+                        "_-_ Replaced _On Diet_ with _Fatigue_: starving causes your stats to drop and make your regen stall after eating food\n" +
+                        "_-_ Replaced _Swarm Intelligence_ with _Crowd Diversity_: mobs now have random sizes, which determines their stats\n" +
+                        "_-_ Replaced _Badder Bosses_ with _Infestation_: increases level size by 4x and increases amount of monsters by 16x"));
+
+        changes = new ChangeInfo("Coming Soon", true, "");
 		changes.hardlight(0xCCCCCC);
 		changeInfos.add(changes);
 
