@@ -172,7 +172,7 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 		} else if (freerunCooldown > 0){
 			return Messages.get(this, "resting_desc", freerunCooldown);
 		} else {
-			return Messages.get(this, "momentum_desc", momentumStacks);
+			return Messages.get(this, "momentum_desc", momentumStacks*5);
 		}
 	}
 	
