@@ -59,7 +59,7 @@ public class Combo extends Buff implements ActionIndicator.Action {
 	
 	private int count = 0;
 	private float comboTime = 0f;
-	private float initialComboTime = 5f;
+	private float initialComboTime = 10f;
 
 	@Override
 	public int icon() {
@@ -89,7 +89,7 @@ public class Combo extends Buff implements ActionIndicator.Action {
 	public void hit( Char enemy ) {
 
 		count++;
-		comboTime = 5f;
+		comboTime = 10f;
 
 		if (!enemy.isAlive() || (enemy.buff(Corruption.class) != null && enemy.HP == enemy.HT)){
 			comboTime = Math.max(comboTime, 15*((Hero)target).pointsInTalent(Talent.CLEAVE));
