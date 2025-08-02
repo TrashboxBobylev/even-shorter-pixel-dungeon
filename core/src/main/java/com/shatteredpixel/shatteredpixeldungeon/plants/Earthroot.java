@@ -41,8 +41,13 @@ public class Earthroot extends Plant {
 		image = 8;
 		seedClass = Seed.class;
 	}
-	
-	@Override
+
+    @Override
+    public boolean isHarmful() {
+        return false;
+    }
+
+    @Override
 	public void activate( Char ch ) {
 
 		if (ch != null){

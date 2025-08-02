@@ -42,8 +42,13 @@ public class Sungrass extends Plant {
 		image = 3;
 		seedClass = Seed.class;
 	}
-	
-	@Override
+
+    @Override
+    public boolean isHarmful() {
+        return false;
+    }
+
+    @Override
 	public void activate( Char ch ) {
 		
 		if (ch != null){

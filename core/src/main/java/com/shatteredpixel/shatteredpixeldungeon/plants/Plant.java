@@ -54,6 +54,10 @@ public abstract class Plant implements Bundlable {
 
 	protected Class<? extends Plant.Seed> seedClass;
 
+    public boolean isHarmful(){
+        return true;
+    }
+
 	public void trigger(){
 
 		Char ch = Actor.findChar(pos);
@@ -62,9 +66,13 @@ public abstract class Plant implements Bundlable {
 			((Hero) ch).interrupt();
 		}
 
-		if (Dungeon.level.heroFOV[pos] && Dungeon.hero.hasTalent(Talent.NATURES_AID)){
+		if (ch instanceof Hero && Dungeon.hero.hasTalent(Talent.NATURES_AID)){
 			// 3/5 turns based on talent points spent
-			Barkskin.conditionallyAppend(Dungeon.hero, 2, 1 + 2*(Dungeon.hero.pointsInTalent(Talent.NATURES_AID)));
+            int interval = 1 + 2 * (Dungeon.hero.pointsInTalent(Talent.NATURES_AID));
+            if (isHarmful()){
+                interval *= 3;
+            }
+            Barkskin.conditionallyAppend(Dungeon.hero, 2, interval);
 		}
 
 		wither();

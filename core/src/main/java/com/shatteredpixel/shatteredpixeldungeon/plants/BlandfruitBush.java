@@ -31,7 +31,12 @@ public class BlandfruitBush extends Plant {
 		image = 12;
 	}
 
-	@Override
+    @Override
+    public boolean isHarmful() {
+        return false;
+    }
+
+    @Override
 	public void activate( Char ch ) {
 		Dungeon.level.drop( new Blandfruit(), pos ).sprite.drop();
 	}

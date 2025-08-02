@@ -46,8 +46,13 @@ public class Swiftthistle extends Plant {
 		image = 2;
 		seedClass = Seed.class;
 	}
-	
-	@Override
+
+    @Override
+    public boolean isHarmful() {
+        return false;
+    }
+
+    @Override
 	public void activate( Char ch ) {
 		if (ch != null) {
 			Buff.affect(ch, TimeBubble.class).reset();
