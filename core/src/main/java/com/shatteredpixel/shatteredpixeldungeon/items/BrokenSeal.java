@@ -256,7 +256,7 @@ public class BrokenSeal extends Item {
 		private int cooldown = 0;
 		private int turnsSinceEnemies = 0;
 
-		private static int COOLDOWN_START = 150;
+		private static int COOLDOWN_START = 100;
 
 		@Override
 		public int icon() {
