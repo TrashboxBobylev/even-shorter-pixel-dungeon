@@ -419,7 +419,7 @@ public class MeleeWeapon extends Weapon {
 			if (charges < chargeCap()){
 				if (Regeneration.regenOn()){
 					//60 to 45 turns per charge
-					float chargeToGain = 1/(60f-1.5f*(chargeCap()-charges));
+					float chargeToGain = 1/(60f-(1.5f + 1f*Dungeon.hero.pointsInTalent(Talent.DESPERATE_CHARGE))*(chargeCap()-charges));
 
 					//50% slower charge gain with brawler's stance enabled, even if buff is inactive
 					if (Dungeon.hero.buff(RingOfForce.BrawlersStance.class) != null){
