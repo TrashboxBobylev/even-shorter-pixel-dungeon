@@ -69,7 +69,6 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 		if (freerunCooldown == 0 && !freerunning() && target.invisible > 0 && Dungeon.hero.pointsInTalent(Talent.SPEEDY_STEALTH) >= 1){
 			momentumStacks = Math.min(momentumStacks + 2, 10);
 			movedLastTurn = true;
-			ActionIndicator.setAction(this);
 			BuffIndicator.refreshHero();
 		}
 
@@ -80,10 +79,7 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 		} else if (!movedLastTurn){
 			momentumStacks = (int)GameMath.gate(0, momentumStacks-1, Math.round(momentumStacks * 0.667f));
 			if (momentumStacks <= 0) {
-				ActionIndicator.clearAction(this);
 				BuffIndicator.refreshHero();
-			} else {
-				ActionIndicator.refresh();
 			}
 		}
 		movedLastTurn = false;
@@ -95,7 +91,7 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 	public void gainStack(){
 		movedLastTurn = true;
 		if (freerunCooldown <= 0 && !freerunning()){
-			postpone(target.cooldown()+(1/target.speed()));
+			postpone(target.cooldown());
 			momentumStacks = Math.min(momentumStacks + 1, 10);
 			BuffIndicator.refreshHero();
 		}
@@ -194,9 +190,6 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 		momentumStacks = bundle.getInt(STACKS);
 		freerunTurns = bundle.getInt(FREERUN_TURNS);
 		freerunCooldown = bundle.getInt(FREERUN_CD);
-		if (momentumStacks > 0 && freerunTurns <= 0){
-			ActionIndicator.setAction(this);
-		}
 		movedLastTurn = false;
 	}
 
