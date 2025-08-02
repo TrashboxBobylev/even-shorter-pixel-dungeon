@@ -35,8 +35,6 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor;
-import com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.ParchmentScrap;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
@@ -318,16 +316,14 @@ public class Ghost extends NPC {
 				processed = false;
 				depth = Dungeon.depth;
 
-				//50%:tier2, 30%:tier3, 15%:tier4, 5%:tier5
-				switch (Random.chances(new float[]{0, 0, 10, 6, 3, 1})){
+				//50%:tier2, 50%:tier3, 15%:tier4
+				switch (Random.chances(new float[]{0, 0, 10, 10})){
 					default:
 					case 2: armor = new LeatherArmor(); break;
 					case 3: armor = new MailArmor();    break;
-					case 4: armor = new ScaleArmor();   break;
-					case 5: armor = new PlateArmor();   break;
 				}
-				//50%:tier2, 30%:tier3, 15%:tier4, 5%:tier5
-				int wepTier = Random.chances(new float[]{0, 0, 10, 6, 3, 1});
+				//50%:tier2, 50%:tier3
+				int wepTier = Random.chances(new float[]{0, 0, 10, 10});
 				weapon = (Weapon) Generator.random(Generator.wepTiers[wepTier - 1]);
 
 				//clear weapon's starting properties
