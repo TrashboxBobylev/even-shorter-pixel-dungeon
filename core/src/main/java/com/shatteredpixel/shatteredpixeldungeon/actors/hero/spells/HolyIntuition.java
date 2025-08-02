@@ -22,7 +22,6 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.hero.spells;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
-import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Identification;
@@ -51,7 +50,7 @@ public class HolyIntuition extends InventoryClericSpell {
 
 	@Override
 	public float chargeUse(Hero hero) {
-		return 4 - hero.pointsInTalent(Talent.HOLY_INTUITION);
+		return 3 - hero.pointsInTalent(Talent.HOLY_INTUITION);
 	}
 
 	@Override
