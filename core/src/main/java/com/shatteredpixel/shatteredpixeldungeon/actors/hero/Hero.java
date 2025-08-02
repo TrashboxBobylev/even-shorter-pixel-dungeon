@@ -536,6 +536,9 @@ public class Hero extends Char {
 					}
 				}
 			}
+            if (buff(Talent.PatientStrikeTracker.class) != null){
+                accuracy *= 1.75f;
+            }
 		}
 
 		if (buff(Scimitar.SwordDance.class) != null){
