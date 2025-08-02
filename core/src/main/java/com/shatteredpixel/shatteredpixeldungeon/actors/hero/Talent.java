@@ -727,7 +727,7 @@ public enum Talent {
 				Char ch = Actor.findChar(grassCell);
 				if (ch != null && ch.alignment == Char.Alignment.ENEMY){
 					//1/2 turns of roots
-					Buff.affect(ch, Roots.class, factor * hero.pointsInTalent(LIQUID_NATURE));
+					Buff.affect(ch, Roots.class, factor * (2 + hero.pointsInTalent(LIQUID_NATURE)));
 				}
 				if (Dungeon.level.map[grassCell] == Terrain.EMPTY ||
 						Dungeon.level.map[grassCell] == Terrain.EMBERS ||
@@ -738,7 +738,7 @@ public enum Talent {
 				CellEmitter.get(grassCell).burst(LeafParticle.LEVEL_SPECIFIC, 4);
 			}
 			// 4/6 cells total
-			int totalGrassCells = (int) (factor * (2 + 2 * hero.pointsInTalent(LIQUID_NATURE)));
+			int totalGrassCells = (int) (factor * (3 + 3 * hero.pointsInTalent(LIQUID_NATURE)));
 			while (grassCells.size() > totalGrassCells){
 				grassCells.remove(0);
 			}
