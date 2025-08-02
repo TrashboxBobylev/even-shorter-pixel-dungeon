@@ -754,9 +754,9 @@ public enum Talent {
 			Dungeon.observe();
 		}
 		if (hero.hasTalent(LIQUID_AGILITY)){
-			Buff.prolong(hero, LiquidAgilEVATracker.class, hero.cooldown() + Math.max(0, factor-1));
+			Buff.prolong(hero, LiquidAgilEVATracker.class, hero.cooldown() + Math.max(0, factor));
 			if (factor >= 0.5f){
-				Buff.prolong(hero, LiquidAgilACCTracker.class, 5f).uses = Math.round(factor);
+				Buff.prolong(hero, LiquidAgilACCTracker.class, 5f).uses = Math.round(factor+1);
 			}
 		}
 	}
