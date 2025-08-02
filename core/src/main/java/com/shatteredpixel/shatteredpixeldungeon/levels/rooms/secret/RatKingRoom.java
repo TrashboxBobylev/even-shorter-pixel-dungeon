@@ -31,6 +31,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.sewerboss.SewerBossEntranceRoom;
+import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
 public class RatKingRoom extends SecretRoom {
@@ -55,17 +56,9 @@ public class RatKingRoom extends SecretRoom {
 		Door entrance = entrance();
 		entrance.set( Door.Type.HIDDEN );
 		int door = entrance.x + entrance.y * level.width();
-
-        boolean isTome = false;
 		
 		for (int i=left + 1; i < right; i++) {
-            if (!isTome && i % 2 == 0){
-                addCoolerChest( level, (top + 1) * level.width() + i, door );
-                isTome = true;
-            } else {
-                addChest( level, (top + 1) * level.width() + i, door );
-            }
-
+            addChest( level, (top + 1) * level.width() + i, door );
 			addChest( level, (bottom - 1) * level.width() + i, door );
 		}
 		
@@ -73,6 +66,27 @@ public class RatKingRoom extends SecretRoom {
 			addChest( level, i * level.width() + left + 1, door );
 			addChest( level, i * level.width() + right - 1, door );
 		}
+
+        int chests = 0;
+
+        for (Point cell: this.getPoints()){
+            if (level.heaps.containsKey(level.pointToCell(cell))){
+                chests++;
+            }
+        }
+
+        int desiredTomeChest = Random.Int(0, chests);
+        chests = 0;
+        for (Point cell: this.getPoints()){
+            if (level.heaps.containsKey(level.pointToCell(cell))){
+                if (chests == desiredTomeChest){
+                    level.drop( new TengusMask(), level.pointToCell(cell)).type = Heap.Type.CHEST;
+                    break;
+                } else {
+                    chests++;
+                }
+            }
+        }
 
 		RatKing king = new RatKing();
 		king.pos = level.pointToCell(random( 2 ));
@@ -92,18 +106,4 @@ public class RatKingRoom extends SecretRoom {
 		
 		level.drop( prize, pos ).type = Heap.Type.CHEST;
 	}
-
-    private static void addCoolerChest( Level level, int pos, int door ) {
-
-        if (pos == door - 1 ||
-                pos == door + 1 ||
-                pos == door - level.width() ||
-                pos == door + level.width()) {
-            return;
-        }
-
-        Item prize = new TengusMask();
-
-        level.drop( prize, pos ).type = Heap.Type.CHEST;
-    }
 }
