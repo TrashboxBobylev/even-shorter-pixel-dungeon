@@ -40,9 +40,11 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ghost;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
 import com.shatteredpixel.shatteredpixeldungeon.items.Heap;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
+import com.shatteredpixel.shatteredpixeldungeon.items.Stylus;
 import com.shatteredpixel.shatteredpixeldungeon.items.Torch;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DriedRose;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.SupplyRation;
 import com.shatteredpixel.shatteredpixeldungeon.items.journal.DocumentPage;
 import com.shatteredpixel.shatteredpixeldungeon.items.journal.GuidePage;
@@ -50,6 +52,8 @@ import com.shatteredpixel.shatteredpixeldungeon.items.journal.RegionLorePage;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfStrength;
+import com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade;
 import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.MimicTooth;
 import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.TrinketCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
@@ -130,9 +134,6 @@ public abstract class RegularLevel extends Level {
 		if (feeling == Feeling.LARGE){
 			standards = (int)Math.ceil(standards * 1.5f);
 		}
-        if (Dungeon.isChallenged(Challenges.MANY_MOBS)){
-            standards *= 4;
-        }
 		for (int i = 0; i < standards; i++) {
 			StandardRoom s;
 			do {
@@ -231,9 +232,6 @@ public abstract class RegularLevel extends Level {
 				}
 			}
 		}
-        if (Dungeon.isChallenged(Challenges.MANY_MOBS)){
-            mobsToSpawn *= 16;
-        }
 		Random.shuffle(stdRooms);
 		Iterator<Room> stdRoomIter = stdRooms.iterator();
 
@@ -454,7 +452,12 @@ public abstract class RegularLevel extends Level {
 
 		for (Item item : itemsToSpawn) {
 			int cell = randomDropCell();
-			if (item instanceof TrinketCatalyst){
+			if (Dungeon.isChallenged(Challenges.REDUCED_POWER) &&
+					Dungeon.depth > 1 && findMob(cell) == null
+						&& (item instanceof ScrollOfUpgrade || item instanceof PotionOfStrength ||
+						item instanceof Stylus || item instanceof Torch || item instanceof Food)){
+					mobs.add(Mimic.spawnAt(cell, item));
+			} else if (item instanceof TrinketCatalyst){
 				drop( item, cell ).type = Heap.Type.LOCKED_CHEST;
 				int keyCell = randomDropCell();
 				drop( new GoldenKey(Dungeon.depth), keyCell ).type = Heap.Type.HEAP;

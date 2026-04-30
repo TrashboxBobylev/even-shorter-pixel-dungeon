@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.armor;
 
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -634,7 +635,8 @@ public class Armor extends EquipableItem {
 				n++;
 			}
 		}
-		level(n);
+		if (!Dungeon.isChallenged(Challenges.REDUCED_POWER))
+			level(n);
 
 		//we use a separate RNG here so that variance due to things like parchment scrap
 		//does not affect levelgen

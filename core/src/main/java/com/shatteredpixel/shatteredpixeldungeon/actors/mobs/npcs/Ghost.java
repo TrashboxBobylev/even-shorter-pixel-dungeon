@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -343,8 +344,10 @@ public class Ghost extends NPC {
 				} else {
 					itemLevel = 3;
 				}
-				weapon.upgrade(itemLevel);
-				armor.upgrade(itemLevel);
+				if (!Dungeon.isChallenged(Challenges.REDUCED_POWER)) {
+					weapon.upgrade(itemLevel);
+					armor.upgrade(itemLevel);
+				}
 
 				// 20% base chance to be enchanted, stored separately so status isn't revealed early
 				//we generate first so that the outcome doesn't affect the number of RNG rolls

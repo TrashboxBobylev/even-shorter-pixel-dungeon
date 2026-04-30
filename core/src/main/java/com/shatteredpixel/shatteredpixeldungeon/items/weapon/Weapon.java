@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon;
 
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -407,7 +408,8 @@ abstract public class Weapon extends KindOfWeapon {
 				n++;
 			}
 		}
-		level(n);
+		if (!Dungeon.isChallenged(Challenges.REDUCED_POWER))
+			level(n);
 
 		//we use a separate RNG here so that variance due to things like parchment scrap
 		//does not affect levelgen

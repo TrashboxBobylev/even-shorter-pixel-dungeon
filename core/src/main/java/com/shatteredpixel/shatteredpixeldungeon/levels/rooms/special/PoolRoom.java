@@ -21,6 +21,7 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special;
 
+import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Piranha;
 import com.shatteredpixel.shatteredpixeldungeon.items.Generator;
@@ -126,7 +127,7 @@ public class PoolRoom extends SpecialRoom {
 		prize.cursedKnown = true;
 		
 		//33% chance for an extra update.
-		if (Random.Int(3) == 0){
+		if (Random.Int(3) == 0 && !Dungeon.isChallenged(Challenges.REDUCED_POWER)){
 			prize.upgrade();
 		}
 

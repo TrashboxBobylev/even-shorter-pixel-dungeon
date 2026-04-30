@@ -85,7 +85,8 @@ public class CryptRoom extends SpecialRoom {
 
 		//if it isn't already cursed, give it a free upgrade
 		if (!prize.cursed){
-			prize.upgrade();
+			if (!Dungeon.isChallenged(Challenges.REDUCED_POWER))
+				prize.upgrade();
 			//curse the armor, unless it has a glyph
 			if (!prize.hasGoodGlyph()){
 				prize.inscribe(curse);
