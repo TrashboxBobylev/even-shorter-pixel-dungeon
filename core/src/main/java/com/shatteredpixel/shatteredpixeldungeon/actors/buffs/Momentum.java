@@ -102,7 +102,7 @@ public class Momentum extends Buff implements ActionIndicator.Action {
 	}
 	
 	public float speedMultiplier(){
-        return 1.5f/10*momentumStacks;
+        return 1 + 0.5f/10*momentumStacks;
 	}
 	
 	public int evasionBonus( int heroLvl, int excessArmorStr ){
