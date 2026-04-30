@@ -116,7 +116,11 @@ public class v3_X_Changes {
                         "_-_ Replaced _Barren Land_ with _Overreaction_: debuffs last 3x longer and are no longer cured by some things\n" +
                         "_-_ Replaced _On Diet_ with _Fatigue_: starving causes your stats to drop and make your regen stall after eating food\n" +
                         "_-_ Replaced _Swarm Intelligence_ with _Crowd Diversity_: mobs now have random sizes, which determines their stats\n" +
-                        "_-_ Replaced _Badder Bosses_ with _Infestation_: increases level size by 4x and increases amount of monsters by 16x"));
+                        "_-_ Replaced _Badder Bosses_ with _Unenchanted_: natural items are always +0 and progression items are guarded by mimics"));
+
+		changes.addButton(new ChangeButton(new Image(Assets.Sprites.SPINNER, 144, 0, 16, 16), "1.1",
+				"_-_ Fixed freerunner instantly dying.\n" +
+						"_-_ Replaced _Infestation_ challenge with _Unenchanted_"));
 
         changes = new ChangeInfo("Coming Soon", true, "");
 		changes.hardlight(0xCCCCCC);
